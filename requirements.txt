@@ -1,0 +1,9 @@
+pyyaml
+matplotlib==3.5.2
+numpy==1.21.4
+opencv-python==4.5.5.64
+opencv-python-headless==4.5.5.64
+scipy==1.7.3
+tensorboard==2.9.1
+tqdm==4.64.0
+pycocotools==2.0.4
