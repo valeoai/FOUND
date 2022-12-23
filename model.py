@@ -168,12 +168,13 @@ class FoundModel(nn.Module):
     def decoder_save_weights(self, save_dir, n_iter):
         state_dict = {}
         state_dict["decoder"] = self.decoder.state_dict()
-        torch.save(
-            state_dict,
-            os.path.join(
+        fname = os.path.join(
                 save_dir, f"decoder_weights_niter{n_iter}.pt"
-            ),
-        )
+                )
+        torch.save(state_dict, fname)
+        print(f"\n----"
+              f"\nModel saved at {fname}"
+            )
     
     @torch.no_grad()
     def extract_feats(self, dims, type_feats="k"):

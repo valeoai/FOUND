@@ -12,9 +12,9 @@ training:
   dataset_set: null
 
   # Hyper params
-  seed: 1
+  seed: 0
   max_iter: 500
-  nb_epochs: 5
+  nb_epochs: 3
   batch_size: 50
   lr0: 5e-2
   step_lr_size: 50

@@ -19,6 +19,8 @@ from datasets.geometric_transforms import resize
 from datasets.VOC import get_voc_detection_gt, create_gt_masks_if_voc, create_VOC_loader
 from datasets.augmentations import geometric_augmentations, photometric_augmentations
 
+from datasets.uod_datasets import UODDataset
+
 NORMALIZE = T.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 
 def set_dataset_dir(dataset_name, root_dir):
@@ -80,17 +82,29 @@ def build_dataset(
     Build dataset
     """
 
-    img_dir, gt_dir = set_dataset_dir(dataset_name, root_dir)
+    if evaluation_type == "saliency":
+        img_dir, gt_dir = set_dataset_dir(dataset_name, root_dir)
 
-    dataset = FoundDataset(
-        name=dataset_name,
-        img_dir=img_dir,
-        gt_dir=gt_dir,
-        dataset_set=dataset_set,
-        config=config,
-        for_eval=for_eval,
-        evaluation_type=evaluation_type,
-    )
+        dataset = FoundDataset(
+            name=dataset_name,
+            img_dir=img_dir,
+            gt_dir=gt_dir,
+            dataset_set=dataset_set,
+            config=config,
+            for_eval=for_eval,
+            evaluation_type=evaluation_type,
+        )
+
+    elif evaluation_type == "uod":
+        assert dataset_name in ["VOC07", "VOC12", "COCO20k"]
+        dataset_set = "trainval" if dataset_name in ["VOC07", "VOC12"] else "train"
+        no_hards = False
+        dataset = UODDataset(
+            dataset_name,
+            dataset_set,
+            root_dir=root_dir,
+            remove_hards=no_hards,
+        )
 
     return dataset
 
