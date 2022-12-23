@@ -37,6 +37,7 @@ If you use our **FOUND** code or framework in your research, please consider cit
 - [Using FOUND](#usage-of-found)
 - [Evaluation: Saliency object detection](#saliency-object-detection)
 - [Evaluation: Unsupervised object discovery](#unsupervised-object-discovery)
+- [Acknowledgments](#acknowledgments)
 
 ## Installation of FOUND
 
@@ -111,3 +112,6 @@ python main_found_evaluate.py --eval-type uod --dataset-eval VOC12 --evaluation-
 python main_found_evaluate.py --eval-type uod --dataset-eval COCO20k --evaluation-mode single --dataset-dir $DATASET_DIR
 ```
 
+## Acknowledgments
+
+This repository was build on the great works [SelfMask](https://github.com/NoelShin/selfmask), [TokenCut](https://github.com/YangtaoWANG95/TokenCut) and our previous work [LOST](https://github.com/valeoai/LOST). Please, consider acknowleding these projects.
