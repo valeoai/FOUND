@@ -4,7 +4,7 @@ Pytorch implementation of the unsupervised object localization method **FOUND**.
 <div align='center'>
 
 **Unsupervised Object Localization:
-Observing the Background to Discover Objects**
+Observing the Background to Discover Objects**\
 by *Oriane Siméoni, Chloé Sekkat, Gilles Puy, Antonin Vobecky, Eloi Zablocki and Patrick Pérez*
 
 [![Arxiv](http://img.shields.io/badge/paper-arxiv.2212.07834-B31B1B.svg)](https://arxiv.org/abs/2212.07834)
@@ -33,7 +33,7 @@ If you use our **FOUND** code or framework in your research, please consider cit
 ## Overview
 
 - [Presentation](#found)
-- [Installation](#installation)
+- [Installation](#installation-of-found)
 - [Using FOUND](#usage-of-found)
 - [Evaluation: Saliency object detection](#saliency-object-detection)
 - [Evaluation: Unsupervised object discovery](#unsupervised-object-discovery)
@@ -92,7 +92,7 @@ python main_found_evaluate.py --eval-type saliency --dataset-eval ECSSD --evalua
 python main_found_evaluate.py --eval-type saliency --dataset-eval ECSSD --evaluation-mode multi --apply-bilateral --dataset-dir $DATASET_DIR
 ```
 
-### Unsupervised object disovery
+### Unsupervised object discovery
 
 In order to evaluate on the unsupervised object discovery task, we follow the framework used in our previous work [LOST](https://github.com/valeoai/LOST).
 The task is implemented for the following datasets, please download the benckmarks and put them in the folder `data/`.
