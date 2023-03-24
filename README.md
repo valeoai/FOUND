@@ -20,15 +20,18 @@ If you use our **FOUND** code or framework in your research, please consider cit
 
 
 ```
-@article{simeoni2022unsupervised,
+@inproceedings{simeoni2023found,
   author    = {Siméoni, Oriane and Sekkat, Chloé and Puy, Gilles and Vobecky, Antonin and Zablocki, Éloi and Pérez, Patrick},
   title     = {Unsupervised Object Localization: Observing the Background to Discover Objects},
-  journal   = {CoRR},
-  volume    = {abs/2212.07834},
-  year      = {2022},
-  ee        = {http://arxiv.org/abs/2212.07834}
+  booktitle = {{IEEE} Conference on Computer Vision and Pattern Recognition, {CVPR}},
+  year      = {2023},
 }
 ```
+
+## Updates
+
+- [Feb 2023] FOUND is accepted to CVPR23 !
+- [Dec 2022] First release
 
 ## Overview
 
@@ -114,4 +117,4 @@ python main_found_evaluate.py --eval-type uod --dataset-eval COCO20k --evaluatio
 
 ## Acknowledgments
 
-This repository was build on the great works [SelfMask](https://github.com/NoelShin/selfmask), [TokenCut](https://github.com/YangtaoWANG95/TokenCut) and our previous work [LOST](https://github.com/valeoai/LOST). Please, consider acknowleding these projects.
+This repository was build on the great works [SelfMask](https://github.com/NoelShin/selfmask), [TokenCut](https://github.com/YangtaoWANG95/TokenCut) and our previous work [LOST](https://github.com/valeoai/LOST). Please, consider acknowledging these projects.
