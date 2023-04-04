@@ -20,6 +20,7 @@ training:
   step_lr_size: 50
   step_lr_gamma: 0.95
   w_bs_loss: 1.5
+  w_self_loss: 4.0
   stop_bkg_loss: 100
 
   # Augmentations
@@ -30,5 +31,6 @@ training:
   cropping_strategy: random_scale
 
 evaluation:
-  type: saliency # uod, retrieval
+  type: saliency
   datasets: [DUT-OMRON, ECSSD]
+  freq: 50

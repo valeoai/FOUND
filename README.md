@@ -3,17 +3,21 @@ Pytorch implementation of the unsupervised object localization method **FOUND**.
 
 <div align='center'>
 
-**Unsupervised Object Localization:
-Observing the Background to Discover Objects**\
-by *Oriane Siméoni, Chloé Sekkat, Gilles Puy, Antonin Vobecky, Eloi Zablocki and Patrick Pérez*
-
-[![Arxiv](http://img.shields.io/badge/paper-arxiv.2212.07834-B31B1B.svg)](https://arxiv.org/abs/2212.07834)
+<h3>Unsupervised Object Localization: Observing the Background to Discover Objects</h3>
+by <i>Oriane Siméoni</i>, <i>Chloé Sekkat</i>, <i>Gilles Puy</i>, <i>Antonin Vobecky</i>, <i>Eloi Zablocki</i> and <i>Patrick Pérez</i> <br>
+<b> CVPR 2023 </b>
+<h4 align="center">
+  | <a href="https://valeoai.github.io/blog/publications/found/">project page</a> |
+  <a href="https://arxiv.org/abs/2212.07834">arXiv</a> |
+  <a href="https://huggingface.co/spaces/osimeoni/FOUND">gradio</a> |
+</h4>
 
 <div>
-  <img width="100%" alt="FOUND visualizations" src="data/examples/found_examples.png">
+  <img width="80%" alt="FOUND visualizations" src="data/examples/found_examples.png">
 </div>
 
 </div>
+
 
 \
 If you use our **FOUND** code or framework in your research, please consider citing:
@@ -30,8 +34,10 @@ If you use our **FOUND** code or framework in your research, please consider cit
 
 ## Updates
 
-- [Feb 2023] FOUND is accepted to CVPR23 !
-- [Dec 2022] First release
+- [Apr. 2023] Release of training code [available here](#training-of-found)
+- [Mar. 2023] Gradio space is available ([link](https://huggingface.co/spaces/osimeoni/FOUND))
+- [Feb. 2023] FOUND is accepted to CVPR23 !
+- [Dec. 2022] First release
 
 ## Overview
 
@@ -40,6 +46,7 @@ If you use our **FOUND** code or framework in your research, please consider cit
 - [Using FOUND](#usage-of-found)
 - [Evaluation: Saliency object detection](#saliency-object-detection)
 - [Evaluation: Unsupervised object discovery](#unsupervised-object-discovery)
+- [Training of FOUND](#training-of-found)
 - [Acknowledgments](#acknowledgments)
 
 ## Installation of FOUND
@@ -52,6 +59,9 @@ This code was implemented and tested with python 3.7, PyTorch 1.8.1 and CUDA 11.
 # Create conda environment
 conda create -n found python=3.7
 conda activate found
+
+# Example of pytorch installation
+pip install torch===1.8.1 torchvision==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
 
 # Install dependencies
 pip install -r requirements.txt
@@ -114,6 +124,30 @@ python main_found_evaluate.py --eval-type uod --dataset-eval VOC12 --evaluation-
 # COCO20k
 python main_found_evaluate.py --eval-type uod --dataset-eval COCO20k --evaluation-mode single --dataset-dir $DATASET_DIR
 ```
+
+## Training of FOUND
+
+In order to train a FOUND model, please start by [installing](#installation-of-found) the framework. If already installed, please run again 
+
+```bash
+# Create conda environment
+conda activate found
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+The training is performed on the dataset [DUTS-TR](http://saliencydetection.net/duts/) that should be put in the directory `data`. 
+
+Then the training can be launched using the following command. Visualizations and training curves can be observed using tensorboard.
+```bash
+export DATASET_DIR=data/ # Root directory of all datasets, both training and evaluation
+
+python main_found_train.py --dataset-dir $DATASET_DIR
+```
+
+Once the training done, you can launch the evaluation
+
 
 ## Acknowledgments
 

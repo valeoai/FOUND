@@ -62,7 +62,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset-dir",
         type=str,
-        default="/datasets_local",
     )
     parser.add_argument(
         "--config",

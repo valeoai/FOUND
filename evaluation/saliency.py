@@ -173,7 +173,9 @@ def evaluate_saliency(
 
         # Forward step
         with torch.no_grad():
-            preds, _, shape_f, att = model.forward_step(inputs, for_eval=True)
+            preds, _, shape_f, att = model.forward_step(
+                                        inputs, for_eval=True
+                                    )
 
         if method == "pred":
             h, w = gt_labels.shape[-2:]
@@ -229,8 +231,8 @@ def evaluate_saliency(
                     ).sum(-1).sum(-1).argmax()
                 )
                 pixel_order = np.delete(
-                    pixel_order, int(cc_background.cpu().numpy())
-                )
+                                pixel_order, int(cc_background.cpu().numpy())
+                            )
 
                 preds_up_one_cc = torch.Tensor(labeled == pixel_order[-1]).cuda()
 
@@ -240,27 +242,24 @@ def evaluate_saliency(
                 metrics_res=metrics_res,
                 reset=reset,
             )
-            
-        if writer is not None:
-            write_metric_tf(writer, metrics_res, n_iter=n_iter, name=f"_{evaluation_mode}_")
 
         elif evaluation_mode == 'multi':
             # Eval without bilateral solver
             _, metrics_res = eval_batch(
-                gt_labels,
-                soft_preds.unsqueeze(0) if len(soft_preds.shape) == 2 else soft_preds,
-                metrics_res=metrics_res,
-                reset=reset,
-            )  # soft preds needed for F beta measure
+                                gt_labels,
+                                soft_preds.unsqueeze(0) if len(soft_preds.shape) == 2 else soft_preds,
+                                metrics_res=metrics_res,
+                                reset=reset,
+                            )  # soft preds needed for F beta measure
 
         # Apply bilateral solver
         preds_bs = None
         if apply_bilateral:
             get_all_cc = True if evaluation_mode == 'multi' else False
             preds_bs, _ = batch_apply_bilateral_solver(data,
-                                                       preds_up.detach(),
-                                                       get_all_cc = get_all_cc
-                                                      )
+                            preds_up.detach(),
+                            get_all_cc = get_all_cc
+                        )
 
             _, metrics_res_bs = eval_batch(
                 gt_labels,
@@ -268,9 +267,6 @@ def evaluate_saliency(
                 metrics_res=metrics_res_bs,
                 reset=reset
             )
-
-            if writer is not None:
-                write_metric_tf(writer, metrics_res_bs, n_iter=n_iter, name=f"_{evaluation_mode}-BS_")
 
         bar_str = f"{dataset.name} | {evaluation_mode} mode | " \
                   f"F-max {metrics_res['f_maxs'].avg:.3f} " \
@@ -284,6 +280,23 @@ def evaluate_saliency(
                        f"PA. {metrics_res_bs['pixel_accs'].avg:.3f}"
 
         valbar.set_description(bar_str)
+
+    # Writing in tensorboard
+    if writer is not None:
+        write_metric_tf(
+            writer,
+            metrics_res,
+            n_iter=n_iter,
+            name=f"{dataset.name}_{evaluation_mode}_"
+        )
+        
+        if apply_bilateral:
+                write_metric_tf(
+                    writer,
+                    metrics_res_bs,
+                    n_iter=n_iter,
+                    name=f"{dataset.name}_{evaluation_mode}-BS_"
+                )
 
     # Go back to original transformation
     if im_fullsize:

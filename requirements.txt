@@ -8,3 +8,6 @@ tensorboard
 tqdm==4.64.0
 pycocotools==2.0.4
 Pillow==9.1.1
+scikit-image==0.19.2
+scikit-learn==1.0.2
+scipy==1.7.3
